@@ -1,21 +1,28 @@
 import { Dithering404 } from "@/registry/shaders/dithering-404/dithering-404"
+import { DitheringFrameCard } from "@/registry/shaders/dithering-frame-card/dithering-frame-card"
 import { DitheringGlobeArcsHero } from "@/registry/shaders/dithering-globe-arcs-hero/dithering-globe-arcs-hero"
 import { DitheringGlobeHero } from "@/registry/shaders/dithering-globe-hero/dithering-globe-hero"
 import { DitheringHero } from "@/registry/shaders/dithering-hero/dithering-hero"
 import { DotGridBackground } from "@/registry/shaders/dot-grid-background/dot-grid-background"
 import { GodRaysHero } from "@/registry/shaders/god-rays-hero/god-rays-hero"
+import { GrainGradientAuth } from "@/registry/shaders/grain-gradient-auth/grain-gradient-auth"
 import { GrainGradientCard } from "@/registry/shaders/grain-gradient-card/grain-gradient-card"
 import { HalftoneHero } from "@/registry/shaders/halftone-hero/halftone-hero"
 import { LensDistortionCard } from "@/registry/shaders/lens-distortion-card/lens-distortion-card"
 import { LiquidMetalButton } from "@/registry/shaders/liquid-metal-button/liquid-metal-button"
 import { LiquidMetalOrb } from "@/registry/shaders/liquid-metal-orb/liquid-metal-orb"
+import { MeshGradientAvatar } from "@/registry/shaders/mesh-gradient-avatar/mesh-gradient-avatar"
 import { MeshGradientBackground } from "@/registry/shaders/mesh-gradient-background/mesh-gradient-background"
 import { MeshGradientFooter } from "@/registry/shaders/mesh-gradient-footer/mesh-gradient-footer"
 import { PulsingBorderCard } from "@/registry/shaders/pulsing-border-card/pulsing-border-card"
+import { PulsingBorderPricing } from "@/registry/shaders/pulsing-border-pricing/pulsing-border-pricing"
+import { SmokeRingWaitlist } from "@/registry/shaders/smoke-ring-waitlist/smoke-ring-waitlist"
 import { TestimonialWall } from "@/registry/shaders/testimonial-wall/testimonial-wall"
 import { WarpCta } from "@/registry/shaders/warp-cta/warp-cta"
 import { WaterCausticsHero } from "@/registry/shaders/water-caustics-hero/water-caustics-hero"
 import { WavesBackground } from "@/registry/shaders/waves-background/waves-background"
+
+import { PulsingBorderPromptDemo } from "@/components/pulsing-border-prompt-demo"
 
 /**
  * How an item is laid out in the site previews.
@@ -30,6 +37,14 @@ type Preview = {
   element: React.ReactNode
   usage: string
 }
+
+const TEAM = [
+  { name: "Maya Lindqvist", email: "maya@northwind.dev" },
+  { name: "Daniel Okafor", email: "daniel@northwind.dev" },
+  { name: "Priya Raman", email: "priya@northwind.dev" },
+  { name: "Tomás Herrera", email: "tomas@northwind.dev" },
+  { name: "Hana Sato", email: "hana@northwind.dev" },
+]
 
 export const previews: Record<string, Preview> = {
   "god-rays-hero": {
@@ -107,6 +122,30 @@ export default function Page() {
   return <WarpCta action={{ label: "Get started", href: "/signup" }} />
 }`,
   },
+  "pulsing-border-pricing": {
+    layout: "section",
+    element: <PulsingBorderPricing />,
+    usage: `import { PulsingBorderPricing } from "@/components/pulsing-border-pricing"
+
+export default function Page() {
+  return (
+    <PulsingBorderPricing
+      defaultBilling="yearly"
+      plans={[
+        {
+          name: "Pro",
+          description: "For growing teams.",
+          price: { monthly: 24, yearly: 19 },
+          features: ["Unlimited projects", "Custom domains"],
+          action: { label: "Start free trial", href: "/signup?plan=pro" },
+          featured: true,
+          badge: "Most popular",
+        },
+      ]}
+    />
+  )
+}`,
+  },
   "testimonial-wall": {
     layout: "section",
     element: <TestimonialWall />,
@@ -136,6 +175,31 @@ export default function NotFound() {
   return <Dithering404 colorFront="#a3e635" shape="swirl" />
 }`,
   },
+  "smoke-ring-waitlist": {
+    layout: "section",
+    element: <SmokeRingWaitlist launchDate="2027-06-01T09:00:00Z" />,
+    usage: `// app/page.tsx
+import { SmokeRingWaitlist } from "@/components/smoke-ring-waitlist"
+
+import { joinWaitlist } from "./actions"
+
+export default function Page() {
+  return (
+    <SmokeRingWaitlist
+      brand="Acme"
+      launchDate="2027-06-01T09:00:00Z"
+      onJoin={joinWaitlist}
+    />
+  )
+}
+
+// app/actions.ts
+"use server"
+
+export async function joinWaitlist(email: string) {
+  await db.waitlist.create({ data: { email } })
+}`,
+  },
   "mesh-gradient-footer": {
     layout: "section",
     element: <MeshGradientFooter />,
@@ -150,6 +214,21 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         colors={["#00f5d4", "#00bbf9", "#9b5de5", "#f15bb5"]}
       />
     </>
+  )
+}`,
+  },
+  "grain-gradient-auth": {
+    layout: "section",
+    element: <GrainGradientAuth />,
+    usage: `// app/(auth)/sign-in/page.tsx
+import { GrainGradientAuth } from "@/components/grain-gradient-auth"
+
+export default function SignInPage() {
+  return (
+    <GrainGradientAuth brand="Acme" title="Welcome back">
+      {/* Leave children out for the built-in form, or bring your own */}
+      <SignInForm />
+    </GrainGradientAuth>
   )
 }`,
   },
@@ -242,6 +321,36 @@ export default function Example() {
   )
 }`,
   },
+  "pulsing-border-prompt": {
+    layout: "component",
+    element: <PulsingBorderPromptDemo />,
+    usage: `"use client"
+
+import { useChat } from "@ai-sdk/react"
+
+import { PulsingBorderPrompt } from "@/components/pulsing-border-prompt"
+
+export function Chat() {
+  const { sendMessage, status, stop } = useChat()
+
+  return (
+    <PulsingBorderPrompt
+      status={status}
+      onStop={stop}
+      accept="image/*,.pdf"
+      modes={[
+        { value: "fast", label: "Fast", colors: ["#22d3ee", "#3b82f6"] },
+        { value: "think", label: "Think", colors: ["#d915ef", "#0dc1fd"] },
+      ]}
+      onSubmit={({ text, files, mode }) => {
+        const fileList = new DataTransfer()
+        files.forEach((file) => fileList.items.add(file))
+        sendMessage({ text, files: fileList.files }, { body: { mode } })
+      }}
+    />
+  )
+}`,
+  },
   "grain-gradient-card": {
     layout: "component",
     element: <GrainGradientCard />,
@@ -251,6 +360,22 @@ export default function Example() {
   return <GrainGradientCard title="Golden hour" shape="wave" />
 }`,
   },
+  "dithering-frame-card": {
+    layout: "component",
+    element: <DitheringFrameCard />,
+    usage: `import { DitheringFrameCard } from "@/components/dithering-frame-card"
+
+export default function Example() {
+  return (
+    <DitheringFrameCard
+      title="Realtime collaboration"
+      colorFront="#22d3ee"
+      shape="ripple"
+      frame={16}
+    />
+  )
+}`,
+  },
   "liquid-metal-orb": {
     layout: "component",
     element: <LiquidMetalOrb />,
@@ -258,6 +383,46 @@ export default function Example() {
 
 export default function Example() {
   return <LiquidMetalOrb size={240} shape="circle" />
+}`,
+  },
+  "mesh-gradient-avatar": {
+    layout: "component",
+    element: (
+      <div className="flex w-full max-w-sm flex-col gap-6 border bg-card p-6 text-card-foreground">
+        <div className="flex -space-x-2">
+          {TEAM.map((member) => (
+            <MeshGradientAvatar
+              key={member.email}
+              seed={member.email}
+              name={member.name}
+              size={36}
+              className="ring-2 ring-card"
+            />
+          ))}
+        </div>
+        <ul className="flex flex-col gap-4">
+          {TEAM.slice(0, 3).map((member) => (
+            <li key={member.email} className="flex items-center gap-3">
+              <MeshGradientAvatar seed={member.email} />
+              <span className="flex flex-col">
+                <span className="text-sm font-medium">{member.name}</span>
+                <span className="text-xs text-muted-foreground">
+                  {member.email}
+                </span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ),
+    usage: `import { MeshGradientAvatar } from "@/components/mesh-gradient-avatar"
+
+export function UserAvatar({ user }: { user: User }) {
+  return user.image ? (
+    <img src={user.image} alt={user.name} className="size-10 rounded-full" />
+  ) : (
+    <MeshGradientAvatar seed={user.id} name={user.name} size={40} />
+  )
 }`,
   },
   "lens-distortion-card": {
