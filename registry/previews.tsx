@@ -1,4 +1,5 @@
 import { Dithering404 } from "@/registry/shaders/dithering-404/dithering-404"
+import { DitheringFrameCard } from "@/registry/shaders/dithering-frame-card/dithering-frame-card"
 import { DitheringGlobeArcsHero } from "@/registry/shaders/dithering-globe-arcs-hero/dithering-globe-arcs-hero"
 import { DitheringGlobeHero } from "@/registry/shaders/dithering-globe-hero/dithering-globe-hero"
 import { DitheringHero } from "@/registry/shaders/dithering-hero/dithering-hero"
@@ -15,6 +16,7 @@ import { MeshGradientBackground } from "@/registry/shaders/mesh-gradient-backgro
 import { MeshGradientFooter } from "@/registry/shaders/mesh-gradient-footer/mesh-gradient-footer"
 import { PulsingBorderCard } from "@/registry/shaders/pulsing-border-card/pulsing-border-card"
 import { PulsingBorderPricing } from "@/registry/shaders/pulsing-border-pricing/pulsing-border-pricing"
+import { SmokeRingWaitlist } from "@/registry/shaders/smoke-ring-waitlist/smoke-ring-waitlist"
 import { TestimonialWall } from "@/registry/shaders/testimonial-wall/testimonial-wall"
 import { WarpCta } from "@/registry/shaders/warp-cta/warp-cta"
 import { WaterCausticsHero } from "@/registry/shaders/water-caustics-hero/water-caustics-hero"
@@ -171,6 +173,31 @@ import { Dithering404 } from "@/components/dithering-404"
 
 export default function NotFound() {
   return <Dithering404 colorFront="#a3e635" shape="swirl" />
+}`,
+  },
+  "smoke-ring-waitlist": {
+    layout: "section",
+    element: <SmokeRingWaitlist launchDate="2027-06-01T09:00:00Z" />,
+    usage: `// app/page.tsx
+import { SmokeRingWaitlist } from "@/components/smoke-ring-waitlist"
+
+import { joinWaitlist } from "./actions"
+
+export default function Page() {
+  return (
+    <SmokeRingWaitlist
+      brand="Acme"
+      launchDate="2027-06-01T09:00:00Z"
+      onJoin={joinWaitlist}
+    />
+  )
+}
+
+// app/actions.ts
+"use server"
+
+export async function joinWaitlist(email: string) {
+  await db.waitlist.create({ data: { email } })
 }`,
   },
   "mesh-gradient-footer": {
@@ -331,6 +358,22 @@ export function Chat() {
 
 export default function Example() {
   return <GrainGradientCard title="Golden hour" shape="wave" />
+}`,
+  },
+  "dithering-frame-card": {
+    layout: "component",
+    element: <DitheringFrameCard />,
+    usage: `import { DitheringFrameCard } from "@/components/dithering-frame-card"
+
+export default function Example() {
+  return (
+    <DitheringFrameCard
+      title="Realtime collaboration"
+      colorFront="#22d3ee"
+      shape="ripple"
+      frame={16}
+    />
+  )
 }`,
   },
   "liquid-metal-orb": {

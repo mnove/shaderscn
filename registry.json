@@ -238,6 +238,30 @@
       ]
     },
     {
+      "name": "smoke-ring-waitlist",
+      "type": "registry:block",
+      "title": "Smoke Ring Waitlist",
+      "description": "A full-screen coming soon page with a smoke ring, a launch countdown and a waitlist signup.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/smoke-ring-waitlist/smoke-ring-waitlist.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "waitlist"
+      ]
+    },
+    {
       "name": "mesh-gradient-footer",
       "type": "registry:block",
       "title": "Mesh Gradient Footer",
@@ -387,6 +411,25 @@
       "files": [
         {
           "path": "registry/shaders/grain-gradient-card/grain-gradient-card.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "components",
+        "cards"
+      ]
+    },
+    {
+      "name": "dithering-frame-card",
+      "type": "registry:component",
+      "title": "Dithering Frame Card",
+      "description": "A card set in a thick frame of animated dithering, like a bezel around the content.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/dithering-frame-card/dithering-frame-card.tsx",
           "type": "registry:component"
         }
       ],
