@@ -174,6 +174,29 @@
       ]
     },
     {
+      "name": "pulsing-border-pricing",
+      "type": "registry:block",
+      "title": "Pulsing Border Pricing",
+      "description": "A three-tier pricing section with a billing toggle and a pulsing glow around the featured plan.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/pulsing-border-pricing/pulsing-border-pricing.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "pricing"
+      ]
+    },
+    {
       "name": "testimonial-wall",
       "type": "registry:block",
       "title": "Testimonial Wall",
@@ -231,6 +254,30 @@
       "categories": [
         "sections",
         "footer"
+      ]
+    },
+    {
+      "name": "grain-gradient-auth",
+      "type": "registry:block",
+      "title": "Grain Gradient Auth",
+      "description": "A split sign-in page with a grainy gradient brand panel and a slot for your own form.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "label"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/grain-gradient-auth/grain-gradient-auth.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "auth"
       ]
     },
     {
@@ -307,6 +354,29 @@
       ]
     },
     {
+      "name": "pulsing-border-prompt",
+      "type": "registry:component",
+      "title": "Pulsing Border Prompt",
+      "description": "An AI prompt input with modes and file drops, whose glow shows what it is doing: listening, thinking, streaming or failing.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/pulsing-border-prompt/pulsing-border-prompt.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "components",
+        "inputs"
+      ]
+    },
+    {
       "name": "grain-gradient-card",
       "type": "registry:component",
       "title": "Grain Gradient Card",
@@ -341,6 +411,25 @@
       ],
       "categories": [
         "components"
+      ]
+    },
+    {
+      "name": "mesh-gradient-avatar",
+      "type": "registry:component",
+      "title": "Mesh Gradient Avatar",
+      "description": "A default avatar with a unique mesh gradient generated from any seed, like a user ID or email.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/mesh-gradient-avatar/mesh-gradient-avatar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "components",
+        "avatars"
       ]
     },
     {
