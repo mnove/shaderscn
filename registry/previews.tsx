@@ -1,3 +1,4 @@
+import { ColorPanelsNewsletter } from "@/registry/shaders/color-panels-newsletter/color-panels-newsletter"
 import { Dithering404 } from "@/registry/shaders/dithering-404/dithering-404"
 import { DitheringFrameCard } from "@/registry/shaders/dithering-frame-card/dithering-frame-card"
 import { DitheringGlobeArcsHero } from "@/registry/shaders/dithering-globe-arcs-hero/dithering-globe-arcs-hero"
@@ -8,6 +9,7 @@ import { GodRaysHero } from "@/registry/shaders/god-rays-hero/god-rays-hero"
 import { GrainGradientAuth } from "@/registry/shaders/grain-gradient-auth/grain-gradient-auth"
 import { GrainGradientCard } from "@/registry/shaders/grain-gradient-card/grain-gradient-card"
 import { HalftoneHero } from "@/registry/shaders/halftone-hero/halftone-hero"
+import { HeatmapHero } from "@/registry/shaders/heatmap-hero/heatmap-hero"
 import { LensDistortionCard } from "@/registry/shaders/lens-distortion-card/lens-distortion-card"
 import { LiquidMetalButton } from "@/registry/shaders/liquid-metal-button/liquid-metal-button"
 import { LiquidMetalOrb } from "@/registry/shaders/liquid-metal-orb/liquid-metal-orb"
@@ -16,6 +18,7 @@ import { MeshGradientBackground } from "@/registry/shaders/mesh-gradient-backgro
 import { MeshGradientFooter } from "@/registry/shaders/mesh-gradient-footer/mesh-gradient-footer"
 import { PulsingBorderCard } from "@/registry/shaders/pulsing-border-card/pulsing-border-card"
 import { PulsingBorderPricing } from "@/registry/shaders/pulsing-border-pricing/pulsing-border-pricing"
+import { RadialGradientLogoCloud } from "@/registry/shaders/radial-gradient-logo-cloud/radial-gradient-logo-cloud"
 import { SmokeRingWaitlist } from "@/registry/shaders/smoke-ring-waitlist/smoke-ring-waitlist"
 import { TestimonialWall } from "@/registry/shaders/testimonial-wall/testimonial-wall"
 import { WarpCta } from "@/registry/shaders/warp-cta/warp-cta"
@@ -113,6 +116,23 @@ export default function Page() {
   )
 }`,
   },
+  "heatmap-hero": {
+    layout: "section",
+    element: <HeatmapHero />,
+    usage: `import { HeatmapHero } from "@/components/heatmap-hero"
+
+export default function Page() {
+  return (
+    <HeatmapHero
+      // A dark logo on a transparent background works best.
+      logo="/logo.svg"
+      eyebrow="Introducing Acme 2.0"
+      title="Rebuilt from the ground up"
+      primaryAction={{ label: "Get started", href: "/signup" }}
+    />
+  )
+}`,
+  },
   "warp-cta": {
     layout: "section",
     element: <WarpCta />,
@@ -120,6 +140,33 @@ export default function Page() {
 
 export default function Page() {
   return <WarpCta action={{ label: "Get started", href: "/signup" }} />
+}`,
+  },
+  "color-panels-newsletter": {
+    layout: "section",
+    element: <ColorPanelsNewsletter />,
+    usage: `// app/blog/page.tsx
+import { ColorPanelsNewsletter } from "@/components/color-panels-newsletter"
+
+import { subscribe } from "./actions"
+
+export default function BlogPage() {
+  return (
+    <>
+      <Posts />
+      <ColorPanelsNewsletter
+        title="Get new posts by email"
+        onSubscribe={subscribe}
+      />
+    </>
+  )
+}
+
+// app/blog/actions.ts
+"use server"
+
+export async function subscribe(email: string) {
+  await resend.contacts.create({ email, audienceId: AUDIENCE_ID })
 }`,
   },
   "pulsing-border-pricing": {
@@ -161,6 +208,25 @@ export default function Page() {
           role: "Engineer",
         },
       ]}
+    />
+  )
+}`,
+  },
+  "radial-gradient-logo-cloud": {
+    layout: "section",
+    element: <RadialGradientLogoCloud />,
+    usage: `import { RadialGradientLogoCloud } from "@/components/radial-gradient-logo-cloud"
+
+export default function Page() {
+  return (
+    <RadialGradientLogoCloud
+      title="Trusted by teams at"
+      logos={[
+        { name: "Acme", src: "/logos/acme.svg", href: "https://acme.com" },
+        { name: "Globex", src: "/logos/globex.svg" },
+        { name: "Initech", src: "/logos/initech.svg" },
+      ]}
+      colors={["#bae6fd", "#0ea5e9", "#082f49"]}
     />
   )
 }`,
