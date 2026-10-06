@@ -10,12 +10,14 @@ import { GrainGradientAuth } from "@/registry/shaders/grain-gradient-auth/grain-
 import { GrainGradientCard } from "@/registry/shaders/grain-gradient-card/grain-gradient-card"
 import { HalftoneHero } from "@/registry/shaders/halftone-hero/halftone-hero"
 import { HeatmapHero } from "@/registry/shaders/heatmap-hero/heatmap-hero"
+import { ImageDitheringTeam } from "@/registry/shaders/image-dithering-team/image-dithering-team"
 import { LensDistortionCard } from "@/registry/shaders/lens-distortion-card/lens-distortion-card"
 import { LiquidMetalButton } from "@/registry/shaders/liquid-metal-button/liquid-metal-button"
 import { LiquidMetalOrb } from "@/registry/shaders/liquid-metal-orb/liquid-metal-orb"
 import { MeshGradientAvatar } from "@/registry/shaders/mesh-gradient-avatar/mesh-gradient-avatar"
 import { MeshGradientBackground } from "@/registry/shaders/mesh-gradient-background/mesh-gradient-background"
 import { MeshGradientFooter } from "@/registry/shaders/mesh-gradient-footer/mesh-gradient-footer"
+import { NeuroNoiseStats } from "@/registry/shaders/neuro-noise-stats/neuro-noise-stats"
 import { PulsingBorderCard } from "@/registry/shaders/pulsing-border-card/pulsing-border-card"
 import { PulsingBorderPricing } from "@/registry/shaders/pulsing-border-pricing/pulsing-border-pricing"
 import { RadialGradientLogoCloud } from "@/registry/shaders/radial-gradient-logo-cloud/radial-gradient-logo-cloud"
@@ -25,6 +27,7 @@ import { WarpCta } from "@/registry/shaders/warp-cta/warp-cta"
 import { WaterCausticsHero } from "@/registry/shaders/water-caustics-hero/water-caustics-hero"
 import { WavesBackground } from "@/registry/shaders/waves-background/waves-background"
 
+import { AnnouncementBarDemo } from "@/components/announcement-bar-demo"
 import { PulsingBorderPromptDemo } from "@/components/pulsing-border-prompt-demo"
 
 /**
@@ -212,6 +215,31 @@ export default function Page() {
   )
 }`,
   },
+  "image-dithering-team": {
+    layout: "section",
+    element: <ImageDitheringTeam />,
+    usage: `import { ImageDitheringTeam } from "@/components/image-dithering-team"
+
+export default function AboutPage() {
+  return (
+    <ImageDitheringTeam
+      title="The people behind Acme"
+      members={[
+        {
+          name: "Maya Lindqvist",
+          role: "Co-founder, CEO",
+          image: "/team/maya.jpg",
+          href: "https://x.com/maya",
+        },
+        { name: "Daniel Okafor", role: "Co-founder, CTO", image: "/team/daniel.jpg" },
+      ]}
+      // Dark parts of each photo get colorBack, light parts colorFront.
+      colorBack="#1e1b4b"
+      colorFront="#e0e7ff"
+    />
+  )
+}`,
+  },
   "radial-gradient-logo-cloud": {
     layout: "section",
     element: <RadialGradientLogoCloud />,
@@ -227,6 +255,27 @@ export default function Page() {
         { name: "Initech", src: "/logos/initech.svg" },
       ]}
       colors={["#bae6fd", "#0ea5e9", "#082f49"]}
+    />
+  )
+}`,
+  },
+  "neuro-noise-stats": {
+    layout: "section",
+    element: <NeuroNoiseStats />,
+    usage: `import { NeuroNoiseStats } from "@/components/neuro-noise-stats"
+
+export default function Page() {
+  return (
+    <NeuroNoiseStats
+      title="Built for traffic you can't predict"
+      stats={[
+        { value: "10M+", label: "Requests a day" },
+        { value: "99.99%", label: "Uptime" },
+        { value: "48ms", label: "Median latency" },
+        { value: "35", label: "Regions" },
+      ]}
+      colorMid="#7c3aed"
+      colorFront="#f0abfc"
     />
   )
 }`,
@@ -281,6 +330,43 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       />
     </>
   )
+}`,
+  },
+  "mesh-gradient-announcement-bar": {
+    layout: "section",
+    element: <AnnouncementBarDemo />,
+    usage: `// app/layout.tsx
+import { cookies } from "next/headers"
+
+import { MeshGradientAnnouncementBar } from "@/components/mesh-gradient-announcement-bar"
+
+import { dismissAnnouncement } from "./actions"
+
+export default async function Layout({ children }: { children: React.ReactNode }) {
+  const dismissed = (await cookies()).has("series-a-dismissed")
+
+  return (
+    <>
+      {!dismissed && (
+        <MeshGradientAnnouncementBar
+          message="We raised our Series A"
+          action={{ label: "Read the post", href: "/blog/series-a" }}
+          onDismiss={dismissAnnouncement}
+        />
+      )}
+      {children}
+    </>
+  )
+}
+
+// app/actions.ts
+"use server"
+
+import { cookies } from "next/headers"
+
+export async function dismissAnnouncement() {
+  const cookieStore = await cookies()
+  cookieStore.set("series-a-dismissed", "1", { maxAge: 60 * 60 * 24 * 90 })
 }`,
   },
   "grain-gradient-auth": {

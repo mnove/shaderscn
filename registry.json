@@ -262,6 +262,25 @@
       ]
     },
     {
+      "name": "image-dithering-team",
+      "type": "registry:block",
+      "title": "Image Dithering Team",
+      "description": "A team grid that dithers every headshot into one consistent look, with the original color on hover.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/image-dithering-team/image-dithering-team.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "team"
+      ]
+    },
+    {
       "name": "radial-gradient-logo-cloud",
       "type": "registry:block",
       "title": "Radial Gradient Logo Cloud",
@@ -278,6 +297,25 @@
       "categories": [
         "sections",
         "logos"
+      ]
+    },
+    {
+      "name": "neuro-noise-stats",
+      "type": "registry:block",
+      "title": "Neuro Noise Stats",
+      "description": "A band of headline numbers over a glowing web of fibers, like traffic moving through a network.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/neuro-noise-stats/neuro-noise-stats.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "stats"
       ]
     },
     {
@@ -343,6 +381,26 @@
       "categories": [
         "sections",
         "footer"
+      ]
+    },
+    {
+      "name": "mesh-gradient-announcement-bar",
+      "type": "registry:block",
+      "title": "Mesh Gradient Announcement Bar",
+      "description": "A thin, dismissible announcement strip over a slowly flowing mesh gradient.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/mesh-gradient-announcement-bar/mesh-gradient-announcement-bar.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "banner"
       ]
     },
     {
