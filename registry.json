@@ -152,6 +152,28 @@
       ]
     },
     {
+      "name": "heatmap-hero",
+      "type": "registry:block",
+      "title": "Heatmap Hero",
+      "description": "A launch hero where your logo glows like a heat map above the headline.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/heatmap-hero/heatmap-hero.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "hero"
+      ]
+    },
+    {
       "name": "warp-cta",
       "type": "registry:block",
       "title": "Warp CTA",
@@ -171,6 +193,30 @@
       "categories": [
         "sections",
         "cta"
+      ]
+    },
+    {
+      "name": "color-panels-newsletter",
+      "type": "registry:block",
+      "title": "Color Panels Newsletter",
+      "description": "A compact newsletter signup band with slowly turning glass panels beside the form.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/color-panels-newsletter/color-panels-newsletter.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "newsletter"
       ]
     },
     {
@@ -213,6 +259,25 @@
       "categories": [
         "sections",
         "testimonials"
+      ]
+    },
+    {
+      "name": "radial-gradient-logo-cloud",
+      "type": "registry:block",
+      "title": "Radial Gradient Logo Cloud",
+      "description": "A \"trusted by\" logo strip rising over the glowing horizon of a planet.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/radial-gradient-logo-cloud/radial-gradient-logo-cloud.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "logos"
       ]
     },
     {
