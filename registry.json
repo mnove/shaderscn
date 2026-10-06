@@ -196,6 +196,26 @@
       ]
     },
     {
+      "name": "fluted-glass-app-download",
+      "type": "registry:block",
+      "title": "Fluted Glass App Download",
+      "description": "An app download section with a phone mockup in front of its own screenshot, seen through fluted glass.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/fluted-glass-app-download/fluted-glass-app-download.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "cta"
+      ]
+    },
+    {
       "name": "color-panels-newsletter",
       "type": "registry:block",
       "title": "Color Panels Newsletter",
@@ -281,6 +301,25 @@
       ]
     },
     {
+      "name": "simplex-noise-changelog",
+      "type": "registry:block",
+      "title": "Simplex Noise Changelog",
+      "description": "A changelog timeline where every release gets its own cover, generated from the version number.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/simplex-noise-changelog/simplex-noise-changelog.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "changelog"
+      ]
+    },
+    {
       "name": "radial-gradient-logo-cloud",
       "type": "registry:block",
       "title": "Radial Gradient Logo Cloud",
@@ -362,6 +401,29 @@
       "categories": [
         "sections",
         "waitlist"
+      ]
+    },
+    {
+      "name": "spiral-launch-countdown",
+      "type": "registry:block",
+      "title": "Spiral Launch Countdown",
+      "description": "A launch event countdown over a turning spiral, with add-to-calendar links and a live state.",
+      "dependencies": [
+        "@paper-design/shaders-react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/shaders/spiral-launch-countdown/spiral-launch-countdown.tsx",
+          "type": "registry:component"
+        }
+      ],
+      "categories": [
+        "sections",
+        "launch"
       ]
     },
     {
