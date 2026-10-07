@@ -12,7 +12,13 @@ const THUMBNAIL_SIZE = {
   background: { width: 640, height: 400 },
 }
 
-function ShaderCard({ item }: { item: RegistryItem }) {
+function ShaderCard({
+  item,
+  headingLevel: Heading = "h3",
+}: {
+  item: RegistryItem
+  headingLevel?: "h2" | "h3"
+}) {
   const preview = getPreview(item.name)
 
   return (
@@ -29,14 +35,14 @@ function ShaderCard({ item }: { item: RegistryItem }) {
       </div>
       <div className="flex flex-col gap-1.5 p-4">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="font-heading text-sm">
+          <Heading className="font-heading text-sm">
             <Link
               href={`/shaders/${item.name}`}
               className="outline-none after:absolute after:inset-0"
             >
               {item.title}
             </Link>
-          </h3>
+          </Heading>
           <Badge variant="outline">{getItemKind(item)}</Badge>
         </div>
         <p className="line-clamp-2 text-xs/relaxed text-muted-foreground">
