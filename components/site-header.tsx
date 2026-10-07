@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { MeshGradient } from "@paper-design/shaders-react"
 
 import { getDocsGroups } from "@/lib/registry"
 import { GITHUB_URL } from "@/lib/site"
@@ -7,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { GitHubIcon } from "@/components/icons"
+import { SiteLogo } from "@/components/site-logo"
 import { SiteSearch } from "@/components/site-search"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -25,17 +25,7 @@ function SiteHeader({
         )}
       >
         {sidebarTrigger && <SidebarTrigger className="-mr-4 -ml-2 md:hidden" />}
-        <Link href="/" className="flex items-center gap-2.5">
-          <MeshGradient
-            aria-hidden
-            className="size-5"
-            colors={["#e0eaff", "#241d9a", "#f75092", "#9f50d3"]}
-            distortion={0.8}
-            swirl={0.4}
-            speed={0.5}
-          />
-          <span className="font-heading text-base">shaderscn</span>
-        </Link>
+        <SiteLogo />
         <nav className="flex items-center gap-1 text-xs">
           <Link
             href="/"
