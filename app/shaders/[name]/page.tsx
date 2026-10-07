@@ -103,7 +103,12 @@ export default async function ShaderPage({
               />
             </div>
           </TabsContent>
-          <TabsContent value="code" className="flex flex-col gap-4 pt-2">
+          {/* Kept mounted so the source is in the HTML for search engines. */}
+          <TabsContent
+            value="code"
+            keepMounted
+            className="flex flex-col gap-4 pt-2"
+          >
             {files.map((file) => (
               <CodeBlock
                 key={file.name}
