@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { ArrowUpRightIcon } from "lucide-react"
 
+import { baseOpenGraph } from "@/lib/metadata"
 import {
   installCommand,
   PAPER_SHADERS_URL,
@@ -14,10 +15,15 @@ import { buttonVariants } from "@/components/ui/button"
 import { CodeBlock } from "@/components/code-block"
 import { CommandSnippet } from "@/components/command-snippet"
 
+const title = "Get started"
+const description =
+  "Add shaderscn sections and components to your project with the shadcn CLI, or copy the source directly."
+
 export const metadata: Metadata = {
-  title: "Get started · shaderscn",
-  description:
-    "Add shaderscn sections and components to your project with the shadcn CLI, or copy the source directly.",
+  title,
+  description,
+  alternates: { canonical: "/docs" },
+  openGraph: { ...baseOpenGraph, title, description, url: "/docs" },
 }
 
 const EXAMPLE = "god-rays-hero"
