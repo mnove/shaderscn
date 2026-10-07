@@ -5,6 +5,7 @@ import { getItemKind, getRegistryItems } from "@/lib/registry"
 import { REGISTRY_URL } from "@/lib/site"
 import { JsonLd } from "@/components/json-ld"
 import { ShaderCard } from "@/components/shader-card"
+import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
 // Set here rather than in the layout, which would hand every page the
@@ -94,6 +95,7 @@ export default function Page() {
           </section>
         ))}
       </main>
+      <SiteFooter />
     </>
   )
 }
