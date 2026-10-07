@@ -25,6 +25,7 @@ export const metadata: Metadata = {
   description:
     "Copy-paste animated shader sections, backgrounds and components for shadcn/ui and React, built on Paper Shaders. Install them with the shadcn CLI.",
   openGraph: baseOpenGraph,
+  twitter: { card: "summary_large_image" },
 }
 
 export default function RootLayout({
