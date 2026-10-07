@@ -1,3 +1,5 @@
+![shaderscn: shader components you can copy and paste](.github/cover.png)
+
 # shaderscn
 
 Copy-paste shader sections and components for shadcn/ui, built on [Paper Shaders](https://shaders.paper.design) (`@paper-design/shaders-react`).

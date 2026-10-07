@@ -78,6 +78,7 @@ export default async function ShaderPage({
               programmingLanguage: "TypeScript",
               runtimePlatform: "React",
               softwareRequirements: item.dependencies,
+              license: "https://opensource.org/licenses/MIT",
               keywords: ["shader", "shadcn/ui", ...item.categories],
               isPartOf: { "@id": websiteId },
             },
