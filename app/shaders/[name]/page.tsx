@@ -18,7 +18,7 @@ import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/code-block"
 import { CopyButton } from "@/components/copy-button"
-import { PreviewFrame } from "@/components/preview-frame"
+import { PreviewIframe } from "@/components/preview-iframe"
 import { SiteHeader } from "@/components/site-header"
 
 export const dynamicParams = false
@@ -96,9 +96,11 @@ export default async function ShaderPage({
                 preview.layout !== "section" && "h-[520px]"
               )}
             >
-              <PreviewFrame layout={preview.layout}>
-                {preview.element}
-              </PreviewFrame>
+              <PreviewIframe
+                name={item.name}
+                title={`${item.title} preview`}
+                autoHeight={preview.layout === "section"}
+              />
             </div>
           </TabsContent>
           <TabsContent value="code" className="flex flex-col gap-4 pt-2">
