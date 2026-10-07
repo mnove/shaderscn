@@ -6,9 +6,14 @@ import { previews } from "@/registry/previews"
 
 export type RegistryItem = (typeof registry.items)[number]
 
-export const REGISTRY_URL = (
-  process.env.NEXT_PUBLIC_REGISTRY_URL ?? "http://localhost:3000"
-).replace(/\/$/, "")
+/** Docs sidebar groups, keyed by each item's first category. */
+export const GROUPS = [
+  { id: "sections", label: "Sections" },
+  { id: "backgrounds", label: "Backgrounds" },
+  { id: "components", label: "Components" },
+] as const
+
+export type GroupId = (typeof GROUPS)[number]["id"]
 
 export function getRegistryItems() {
   return registry.items
@@ -22,9 +27,17 @@ export function getPreview(name: string) {
   return previews[name]
 }
 
-export function getInstallCommand(name: string) {
-  return `npx shadcn@latest add ${REGISTRY_URL}/r/${name}.json`
+/** Items grouped for the docs sidebar, with only what the client needs. */
+export function getDocsGroups() {
+  return GROUPS.map((group) => ({
+    ...group,
+    items: registry.items
+      .filter((item) => item.categories[0] === group.id)
+      .map(({ name, title }) => ({ name, title })),
+  }))
 }
+
+export type DocsGroup = ReturnType<typeof getDocsGroups>[number]
 
 export async function getItemSource(item: RegistryItem) {
   return Promise.all(
