@@ -10,14 +10,17 @@ import {
   getPreview,
   getRegistryItem,
   getRegistryItems,
+  REGISTRY_URL,
 } from "@/lib/registry"
+import { baseOpenGraph, websiteId } from "@/lib/metadata"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CodeBlock } from "@/components/code-block"
 import { CopyButton } from "@/components/copy-button"
-import { PreviewFrame } from "@/components/preview-frame"
+import { JsonLd } from "@/components/json-ld"
+import { PreviewIframe } from "@/components/preview-iframe"
 import { SiteHeader } from "@/components/site-header"
 
 export const dynamicParams = false
@@ -32,9 +35,19 @@ export async function generateMetadata({
   const { name } = await params
   const item = getRegistryItem(name)
 
-  return item
-    ? { title: `${item.title} · shaderscn`, description: item.description }
-    : {}
+  if (!item) return {}
+
+  const kind = getItemKind(item)
+  const title = `${item.title} — Shader ${kind} for shadcn/ui`
+  const description = `${item.description} A copy-paste React ${kind.toLowerCase()} for shadcn/ui, built on Paper Shaders.`
+  const url = `/shaders/${item.name}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { ...baseOpenGraph, title, description, url },
+  }
 }
 
 export default async function ShaderPage({
@@ -47,9 +60,48 @@ export default async function ShaderPage({
   const preview = getPreview(item.name)
   const files = await getItemSource(item)
   const installCommand = getInstallCommand(item.name)
+  const url = `${REGISTRY_URL}/shaders/${item.name}`
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "SoftwareSourceCode",
+              "@id": `${url}#code`,
+              name: item.title,
+              description: item.description,
+              url,
+              image: `${url}/opengraph-image`,
+              programmingLanguage: "TypeScript",
+              runtimePlatform: "React",
+              softwareRequirements: item.dependencies,
+              license: "https://opensource.org/licenses/MIT",
+              keywords: ["shader", "shadcn/ui", ...item.categories],
+              isPartOf: { "@id": websiteId },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Shaders",
+                  item: REGISTRY_URL,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: item.title,
+                  item: url,
+                },
+              ],
+            },
+          ],
+        }}
+      />
       <SiteHeader />
       <main className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-10 sm:px-6">
         <div className="flex flex-col gap-4">
@@ -85,12 +137,19 @@ export default async function ShaderPage({
                 preview.layout !== "section" && "h-[520px]"
               )}
             >
-              <PreviewFrame layout={preview.layout}>
-                {preview.element}
-              </PreviewFrame>
+              <PreviewIframe
+                name={item.name}
+                title={`${item.title} preview`}
+                autoHeight={preview.layout === "section"}
+              />
             </div>
           </TabsContent>
-          <TabsContent value="code" className="flex flex-col gap-4 pt-2">
+          {/* Kept mounted so the source is in the HTML for search engines. */}
+          <TabsContent
+            value="code"
+            keepMounted
+            className="flex flex-col gap-4 pt-2"
+          >
             {files.map((file) => (
               <CodeBlock
                 key={file.name}

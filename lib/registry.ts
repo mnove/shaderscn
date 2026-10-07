@@ -6,8 +6,12 @@ import { previews } from "@/registry/previews"
 
 export type RegistryItem = (typeof registry.items)[number]
 
+// Also the site's canonical origin, used for metadata, the sitemap and robots.
 export const REGISTRY_URL = (
-  process.env.NEXT_PUBLIC_REGISTRY_URL ?? "http://localhost:3000"
+  process.env.NEXT_PUBLIC_REGISTRY_URL ??
+  (process.env.NODE_ENV === "production"
+    ? registry.homepage
+    : "http://localhost:3000")
 ).replace(/\/$/, "")
 
 export function getRegistryItems() {

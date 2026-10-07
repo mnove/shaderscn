@@ -3,6 +3,8 @@ import { Geist_Mono, Inter, Merriweather } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { baseOpenGraph, siteDescription } from "@/lib/metadata"
+import { REGISTRY_URL } from "@/lib/registry"
 import { cn } from "@/lib/utils";
 
 const merriweatherHeading = Merriweather({subsets:['latin'],variable:'--font-heading'});
@@ -15,9 +17,14 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "shaderscn",
-  description:
-    "Copy-paste shader sections and components for shadcn/ui, built on Paper Shaders.",
+  metadataBase: new URL(REGISTRY_URL),
+  title: {
+    default: "shaderscn — Shader components for shadcn/ui",
+    template: "%s · shaderscn",
+  },
+  description: siteDescription,
+  openGraph: baseOpenGraph,
+  twitter: { card: "summary_large_image" },
 }
 
 export default function RootLayout({
