@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 
-import { baseOpenGraph } from "@/lib/metadata"
-import { getItemKind, getRegistryItems } from "@/lib/registry"
+import { baseOpenGraph, siteDescription, websiteId } from "@/lib/metadata"
+import { getItemKind, getRegistryItems, REGISTRY_URL } from "@/lib/registry"
+import { JsonLd } from "@/components/json-ld"
 import { ShaderCard } from "@/components/shader-card"
 import { SiteHeader } from "@/components/site-header"
 
@@ -34,6 +35,16 @@ export default function Page() {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "@id": websiteId,
+          name: "shaderscn",
+          url: REGISTRY_URL,
+          description: siteDescription,
+        }}
+      />
       <SiteHeader />
       <main className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16">
         <div className="flex max-w-2xl flex-col gap-4">

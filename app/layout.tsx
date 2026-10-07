@@ -3,7 +3,7 @@ import { Geist_Mono, Inter, Merriweather } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { baseOpenGraph } from "@/lib/metadata"
+import { baseOpenGraph, siteDescription } from "@/lib/metadata"
 import { REGISTRY_URL } from "@/lib/registry"
 import { cn } from "@/lib/utils";
 
@@ -22,8 +22,7 @@ export const metadata: Metadata = {
     default: "shaderscn — Shader components for shadcn/ui",
     template: "%s · shaderscn",
   },
-  description:
-    "Copy-paste animated shader sections, backgrounds and components for shadcn/ui and React, built on Paper Shaders. Install them with the shadcn CLI.",
+  description: siteDescription,
   openGraph: baseOpenGraph,
   twitter: { card: "summary_large_image" },
 }
