@@ -4,7 +4,7 @@ import { Geist_Mono, Inter, Merriweather } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { baseOpenGraph, siteDescription } from "@/lib/metadata"
-import { REGISTRY_URL } from "@/lib/registry"
+import { REGISTRY_URL } from "@/lib/site"
 import { cn } from "@/lib/utils";
 
 const merriweatherHeading = Merriweather({subsets:['latin'],variable:'--font-heading'});

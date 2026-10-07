@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 
 import { baseOpenGraph, siteDescription, websiteId } from "@/lib/metadata"
-import { getItemKind, getRegistryItems, REGISTRY_URL } from "@/lib/registry"
+import { getItemKind, getRegistryItems } from "@/lib/registry"
+import { REGISTRY_URL } from "@/lib/site"
 import { JsonLd } from "@/components/json-ld"
 import { ShaderCard } from "@/components/shader-card"
 import { SiteHeader } from "@/components/site-header"

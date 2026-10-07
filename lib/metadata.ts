@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 
-import { REGISTRY_URL } from "@/lib/registry"
+import { REGISTRY_URL } from "@/lib/site"
 
 export const siteDescription =
   "Copy-paste animated shader sections, backgrounds and components for shadcn/ui and React, built on Paper Shaders. Install them with the shadcn CLI."
