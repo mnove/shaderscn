@@ -20,6 +20,7 @@ import {
 
 import type { DocsGroup, GroupId } from "@/lib/registry"
 import {
+  GITHUB_URL,
   PAPER_SHADERS_URL,
   registryAddCommand,
   urlInstallCommand,
@@ -37,6 +38,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 import { Kbd, KbdGroup } from "@/components/ui/kbd"
+import { GitHubIcon } from "@/components/icons"
 
 // Icons rather than live previews: browsers cap WebGL contexts per page.
 const GROUP_ICONS: Record<GroupId, LucideIcon> = {
@@ -231,6 +233,16 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
               >
                 <ArrowUpRightIcon />
                 Open Paper Shaders
+              </CommandItem>
+              <CommandItem
+                value="View on GitHub"
+                keywords={["source", "repository", "code"]}
+                onSelect={() =>
+                  run(() => window.open(GITHUB_URL, "_blank", "noreferrer"))
+                }
+              >
+                <GitHubIcon />
+                View on GitHub
               </CommandItem>
             </CommandGroup>
           </CommandList>

@@ -2,10 +2,11 @@ import Link from "next/link"
 import { MeshGradient } from "@paper-design/shaders-react"
 
 import { getDocsGroups } from "@/lib/registry"
-import { PAPER_SHADERS_URL } from "@/lib/site"
+import { GITHUB_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { GitHubIcon } from "@/components/icons"
 import { SiteSearch } from "@/components/site-search"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -38,7 +39,10 @@ function SiteHeader({
         <nav className="flex items-center gap-1 text-xs">
           <Link
             href="/"
-            className={buttonVariants({ variant: "ghost", size: "sm" })}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "hidden sm:inline-flex"
+            )}
           >
             Shaders
           </Link>
@@ -52,15 +56,13 @@ function SiteHeader({
         <div className="ml-auto flex items-center gap-1">
           <SiteSearch groups={getDocsGroups()} />
           <a
-            href={PAPER_SHADERS_URL}
+            href={GITHUB_URL}
             target="_blank"
             rel="noreferrer"
-            className={cn(
-              buttonVariants({ variant: "ghost", size: "sm" }),
-              "hidden sm:inline-flex"
-            )}
+            aria-label="shaderscn on GitHub"
+            className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
           >
-            Paper Shaders
+            <GitHubIcon />
           </a>
           <ThemeToggle />
         </div>

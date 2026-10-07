@@ -8,6 +8,8 @@ export const REGISTRY_NAMESPACE = "@shaderscn"
 
 export const PAPER_SHADERS_URL = "https://shaders.paper.design"
 
+export const GITHUB_URL = "https://github.com/mnove/shaderscn"
+
 export function registryAddCommand() {
   return `npx shadcn@latest registry add ${REGISTRY_NAMESPACE}=${REGISTRY_URL}/r/{name}.json`
 }
