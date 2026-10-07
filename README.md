@@ -18,7 +18,7 @@ Every item can be installed with the shadcn CLI:
 npx shadcn@latest add https://<your-domain>/r/god-rays-hero.json
 ```
 
-Set `NEXT_PUBLIC_REGISTRY_URL` so the install commands on the site point at your deployment (it defaults to `http://localhost:3000`).
+Set `NEXT_PUBLIC_REGISTRY_URL` so the install commands on the site point at your deployment (it defaults to the `homepage` in `registry.json` in production and `http://localhost:3000` in development). The same URL is used for canonical links, the sitemap and `robots.txt`.
 
 ## Adding a new shader
 

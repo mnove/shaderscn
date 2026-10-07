@@ -1,6 +1,16 @@
+import type { Metadata } from "next"
+
+import { baseOpenGraph } from "@/lib/metadata"
 import { getRegistryItems } from "@/lib/registry"
 import { ShaderCard } from "@/components/shader-card"
 import { SiteHeader } from "@/components/site-header"
+
+// Set here rather than in the layout, which would hand every page the
+// homepage's canonical URL.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: { ...baseOpenGraph, url: "/" },
+}
 
 export default function Page() {
   const items = getRegistryItems()

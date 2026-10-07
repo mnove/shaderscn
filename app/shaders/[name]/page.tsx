@@ -11,6 +11,7 @@ import {
   getRegistryItem,
   getRegistryItems,
 } from "@/lib/registry"
+import { baseOpenGraph } from "@/lib/metadata"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -32,9 +33,19 @@ export async function generateMetadata({
   const { name } = await params
   const item = getRegistryItem(name)
 
-  return item
-    ? { title: `${item.title} · shaderscn`, description: item.description }
-    : {}
+  if (!item) return {}
+
+  const kind = getItemKind(item)
+  const title = `${item.title} — Shader ${kind} for shadcn/ui`
+  const description = `${item.description} A copy-paste React ${kind.toLowerCase()} for shadcn/ui, built on Paper Shaders.`
+  const url = `/shaders/${item.name}`
+
+  return {
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: { ...baseOpenGraph, title, description, url },
+  }
 }
 
 export default async function ShaderPage({
