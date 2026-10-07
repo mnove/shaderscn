@@ -1,10 +1,12 @@
 import Link from "next/link"
 import { MeshGradient } from "@paper-design/shaders-react"
 
-import { cn } from "@/lib/utils"
+import { getDocsGroups } from "@/lib/registry"
 import { PAPER_SHADERS_URL } from "@/lib/site"
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import { SiteSearch } from "@/components/site-search"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 function SiteHeader({
@@ -48,11 +50,15 @@ function SiteHeader({
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-1">
+          <SiteSearch groups={getDocsGroups()} />
           <a
             href={PAPER_SHADERS_URL}
             target="_blank"
             rel="noreferrer"
-            className={buttonVariants({ variant: "ghost", size: "sm" })}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "hidden sm:inline-flex"
+            )}
           >
             Paper Shaders
           </a>

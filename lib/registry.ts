@@ -27,13 +27,13 @@ export function getPreview(name: string) {
   return previews[name]
 }
 
-/** Items grouped for the docs sidebar, with only what the client needs. */
+/** Items grouped for the docs sidebar and search, with only what the client needs. */
 export function getDocsGroups() {
   return GROUPS.map((group) => ({
     ...group,
     items: registry.items
       .filter((item) => item.categories[0] === group.id)
-      .map(({ name, title }) => ({ name, title })),
+      .map(({ name, title, description }) => ({ name, title, description })),
   }))
 }
 
