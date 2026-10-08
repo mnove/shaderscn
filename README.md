@@ -30,3 +30,7 @@ Set `NEXT_PUBLIC_REGISTRY_URL` so the install commands on the site point at your
    - `section`: rendered at desktop width
    - `component`: centered on a canvas
    - `background`: stretched to fill the frame
+
+## Acknowledgements
+
+The shaders are powered by [Paper Shaders](https://shaders.paper.design) by [Paper](https://paper.design) (`@paper-design/shaders-react`, Apache-2.0). shaderscn is an independent project and isn't affiliated with Paper.

@@ -1,10 +1,11 @@
+// The image renderer only understands plain <img>, not next/image.
+/* eslint-disable @next/next/no-img-element */
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { ImageResponse } from "next/og"
 
 // Shared renderer for the Open Graph images. Shaders are WebGL, which the
-// image renderer can't run, so the cards are typographic with a CSS gradient
-// standing in for the header's mesh gradient.
+// image renderer can't run, so the cards use the static capture of the mark.
 
 export const ogSize = { width: 1200, height: 630 }
 export const ogContentType = "image/png"
@@ -14,13 +15,18 @@ const fonts = Promise.all([
   readFile(path.join(process.cwd(), "assets/fonts/Inter-Regular.ttf")),
 ])
 
-// The header logo's MeshGradient colors.
-const GRADIENT = [
-  "radial-gradient(circle at 88% 12%, #f75092 0%, transparent 42%)",
-  "radial-gradient(circle at 70% 85%, #9f50d3 0%, transparent 48%)",
-  "radial-gradient(circle at 100% 70%, #241d9a 0%, transparent 55%)",
-  "radial-gradient(circle at 60% 30%, rgba(224, 234, 255, 0.35) 0%, transparent 40%)",
-].join(", ")
+// A capture of the live mark on black, so the card's background is black too.
+const mark = readFile(
+  path.join(process.cwd(), "public/brand/mark.png"),
+  "base64"
+).then((data) => `data:image/png;base64,${data}`)
+
+const MARK_SIZE = 440
+const MARK_POSITION = {
+  position: "absolute",
+  top: (ogSize.height - MARK_SIZE) / 2,
+  right: 24,
+} as const
 
 export async function renderOgImage({
   eyebrow,
@@ -31,7 +37,7 @@ export async function renderOgImage({
   title: string
   description: string
 }) {
-  const [merriweather, inter] = await fonts
+  const [[merriweather, inter], markSrc] = await Promise.all([fonts, mark])
 
   return new ImageResponse(
     <div
@@ -42,21 +48,21 @@ export async function renderOgImage({
         width: "100%",
         height: "100%",
         padding: 72,
-        backgroundColor: "#09090b",
-        backgroundImage: GRADIENT,
+        backgroundColor: "#000000",
         color: "#fafafa",
         fontFamily: "Inter",
       }}
     >
+      {/* The capture fades to black at its edges, so it has no visible box. */}
+      <img
+        src={markSrc}
+        alt=""
+        width={MARK_SIZE}
+        height={MARK_SIZE}
+        style={MARK_POSITION}
+      />
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        <div
-          style={{
-            width: 36,
-            height: 36,
-            backgroundImage:
-              "linear-gradient(135deg, #e0eaff 0%, #9f50d3 45%, #f75092 70%, #241d9a 100%)",
-          }}
-        />
+        <img src={markSrc} alt="" width={36} height={36} />
         <span style={{ fontFamily: "Merriweather", fontSize: 32 }}>
           shaderscn
         </span>
@@ -67,7 +73,7 @@ export async function renderOgImage({
           display: "flex",
           flexDirection: "column",
           gap: 24,
-          maxWidth: 860,
+          maxWidth: 700,
         }}
       >
         {eyebrow && (
