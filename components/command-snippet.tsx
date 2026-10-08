@@ -5,9 +5,12 @@ import { CopyButton } from "@/components/copy-button"
 function CommandSnippet({
   command,
   className,
+  children,
 }: {
   command: string
   className?: string
+  /** Extra actions, shown before the copy button. */
+  children?: React.ReactNode
 }) {
   return (
     <div
@@ -16,9 +19,10 @@ function CommandSnippet({
         className
       )}
     >
-      <code className="flex-1 overflow-x-auto font-mono text-xs whitespace-nowrap">
+      <code className="min-w-0 flex-1 overflow-x-auto font-mono text-xs whitespace-nowrap">
         {command}
       </code>
+      {children}
       <CopyButton value={command} />
     </div>
   )

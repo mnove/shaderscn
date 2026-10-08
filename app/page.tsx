@@ -1,8 +1,13 @@
 import type { Metadata } from "next"
+import Link from "next/link"
+import { ArrowDownIcon, InfoIcon, StarIcon } from "lucide-react"
 
 import { baseOpenGraph, siteDescription, websiteId } from "@/lib/metadata"
 import { getItemKind, getRegistryItems } from "@/lib/registry"
-import { REGISTRY_URL } from "@/lib/site"
+import { GITHUB_URL, REGISTRY_URL, urlInstallCommand } from "@/lib/site"
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
+import { CommandSnippet } from "@/components/command-snippet"
 import { JsonLd } from "@/components/json-ld"
 import { ShaderCard } from "@/components/shader-card"
 import { SiteFooter } from "@/components/site-footer"
@@ -66,6 +71,42 @@ export default function Page() {
             . Install them with the shadcn CLI or copy the code straight into
             your app.
           </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <a
+              href="#sections"
+              className={cn(buttonVariants({ size: "lg" }), "px-4")}
+            >
+              Browse shaders <ArrowDownIcon data-icon="inline-end" />
+            </a>
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "px-4"
+              )}
+            >
+              <StarIcon
+                data-icon="inline-start"
+                className="fill-yellow-400 text-yellow-400"
+              />
+              Star on GitHub
+            </a>
+          </div>
+          <CommandSnippet
+            command={urlInstallCommand("god-rays-hero")}
+            className="mt-2 w-full max-w-xl"
+          >
+            <Link
+              href="/docs"
+              aria-label="Setup guide"
+              title="Works in any shadcn project. Add the @shaderscn registry for the shorter form. See the setup guide."
+              className={buttonVariants({ variant: "ghost", size: "icon-sm" })}
+            >
+              <InfoIcon />
+            </Link>
+          </CommandSnippet>
         </div>
         {GROUPS.map((group) => (
           <section
