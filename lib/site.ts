@@ -16,16 +16,12 @@ export const PAPER_SHADERS_URL = "https://shaders.paper.design"
 
 export const GITHUB_URL = "https://github.com/mnove/shaderscn"
 
-export function registryAddCommand() {
-  return `npx shadcn@latest registry add ${REGISTRY_NAMESPACE}=${REGISTRY_URL}/r/{name}.json`
-}
-
-/** Needs the `@shaderscn` registry in the project's `components.json`. */
+/** `@shaderscn` is listed in the shadcn registry directory, so no setup is needed. */
 export function installCommand(name: string) {
   return `npx shadcn@latest add ${REGISTRY_NAMESPACE}/${name}`
 }
 
-/** Works in any shadcn project, no registry setup required. */
+/** Installs straight from the URL, for CLI versions without the registry directory. */
 export function urlInstallCommand(name: string) {
   return `npx shadcn@latest add ${REGISTRY_URL}/r/${name}.json`
 }
