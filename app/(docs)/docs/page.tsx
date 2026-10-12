@@ -7,8 +7,6 @@ import {
   installCommand,
   PAPER_SHADERS_URL,
   REGISTRY_NAMESPACE,
-  REGISTRY_URL,
-  registryAddCommand,
   urlInstallCommand,
 } from "@/lib/site"
 import { buttonVariants } from "@/components/ui/button"
@@ -55,34 +53,23 @@ export default function DocsPage() {
         <CommandSnippet command="npx shadcn@latest init" />
       </Step>
 
-      <Step index="02" title="Add the registry">
-        <Text>
-          Register the <Code>{REGISTRY_NAMESPACE}</Code> namespace in your{" "}
-          <Code>components.json</Code>. You only need to do this once per
-          project.
-        </Text>
-        <CommandSnippet command={registryAddCommand()} />
-        <CodeBlock
-          lang="json"
-          code={`{\n  "registries": {\n    "${REGISTRY_NAMESPACE}": "${REGISTRY_URL}/r/{name}.json"\n  }\n}`}
-        />
-      </Step>
-
-      <Step index="03" title="Add a shader">
+      <Step index="02" title="Add a shader">
         <Text>
           Every shader has its own install command. Pick one from the sidebar to
-          copy it, or swap the name below. The CLI also installs{" "}
+          copy it, or swap the name below. <Code>{REGISTRY_NAMESPACE}</Code> is
+          listed in the shadcn registry directory, so there&apos;s nothing to
+          configure. The CLI also installs{" "}
           <Code>@paper-design/shaders-react</Code> and any shadcn components it
           uses.
         </Text>
         <CommandSnippet command={installCommand(EXAMPLE)} />
         <Text>
-          Skipping the namespace? Install directly from the URL instead.
+          On an older version of the CLI? Install directly from the URL instead.
         </Text>
         <CommandSnippet command={urlInstallCommand(EXAMPLE)} />
       </Step>
 
-      <Step index="04" title="Use it">
+      <Step index="03" title="Use it">
         <Text>
           The component lives in your codebase, so every detail is yours to
           change.
@@ -92,7 +79,7 @@ export default function DocsPage() {
         />
       </Step>
 
-      <Step index="05" title="Customize">
+      <Step index="04" title="Customize">
         <Text>
           Content such as titles, descriptions and actions is passed as props.
           Any other props, including <Code>className</Code>, are forwarded to
@@ -111,7 +98,7 @@ export default function DocsPage() {
         </Text>
       </Step>
 
-      <Step index="06" title="Copy and paste">
+      <Step index="05" title="Copy and paste">
         <Text>
           Prefer to skip the CLI? Every shader page has a Manual tab with the
           dependencies to install and the complete source to paste.

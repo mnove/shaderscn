@@ -4,7 +4,7 @@ import { ArrowDownIcon, InfoIcon, StarIcon } from "lucide-react"
 
 import { baseOpenGraph, siteDescription, websiteId } from "@/lib/metadata"
 import { getItemKind, getRegistryItems } from "@/lib/registry"
-import { GITHUB_URL, REGISTRY_URL, urlInstallCommand } from "@/lib/site"
+import { GITHUB_URL, installCommand, REGISTRY_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { CommandSnippet } from "@/components/command-snippet"
@@ -97,13 +97,13 @@ export default function Page() {
               </a>
             </div>
             <CommandSnippet
-              command={urlInstallCommand("god-rays-hero")}
+              command={installCommand("god-rays-hero")}
               className="mt-2 w-full max-w-xl"
             >
               <Link
                 href="/docs"
                 aria-label="Setup guide"
-                title="Works in any shadcn project. Add the @shaderscn registry for the shorter form. See the setup guide."
+                title="Works in any shadcn project. See the setup guide."
                 className={buttonVariants({
                   variant: "ghost",
                   size: "icon-sm",

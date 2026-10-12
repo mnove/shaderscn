@@ -12,7 +12,7 @@ import {
   getRegistryItems,
 } from "@/lib/registry"
 import { baseOpenGraph, websiteId } from "@/lib/metadata"
-import { REGISTRY_URL, urlInstallCommand } from "@/lib/site"
+import { installCommand as getInstallCommand, REGISTRY_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
@@ -59,7 +59,7 @@ export default async function ShaderPage({
 
   const preview = getPreview(item.name)
   const files = await getItemSource(item)
-  const installCommand = urlInstallCommand(item.name)
+  const installCommand = getInstallCommand(item.name)
   const url = `${REGISTRY_URL}/shaders/${item.name}`
 
   // Same order as the sidebar, so previous/next follow what readers see.

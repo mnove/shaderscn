@@ -19,12 +19,7 @@ import {
 } from "lucide-react"
 
 import type { DocsGroup, GroupId } from "@/lib/registry"
-import {
-  GITHUB_URL,
-  PAPER_SHADERS_URL,
-  registryAddCommand,
-  urlInstallCommand,
-} from "@/lib/site"
+import { GITHUB_URL, PAPER_SHADERS_URL, installCommand } from "@/lib/site"
 import { Button } from "@/components/ui/button"
 import {
   Command,
@@ -187,9 +182,7 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
                 <CommandItem
                   value={`Copy install command for ${current.title}`}
                   keywords={["cli", "npx", "shadcn"]}
-                  onSelect={() =>
-                    copy("install", urlInstallCommand(current.name))
-                  }
+                  onSelect={() => copy("install", installCommand(current.name))}
                 >
                   {copied === "install" ? <CheckIcon /> : <CopyIcon />}
                   Copy install command for {current.title}
@@ -198,17 +191,6 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
                   )}
                 </CommandItem>
               )}
-              <CommandItem
-                value="Copy registry setup command"
-                keywords={["cli", "npx", "shadcn", "namespace"]}
-                onSelect={() => copy("registry", registryAddCommand())}
-              >
-                {copied === "registry" ? <CheckIcon /> : <CopyIcon />}
-                Copy registry setup command
-                {copied === "registry" && (
-                  <CommandShortcut>Copied</CommandShortcut>
-                )}
-              </CommandItem>
               <CommandItem
                 value="Toggle theme"
                 keywords={["dark", "light", "mode", "color"]}
