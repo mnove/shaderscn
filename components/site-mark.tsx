@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { Heatmap } from "@paper-design/shaders-react"
 
@@ -52,7 +50,6 @@ function SiteMark({ className }: { className?: string }) {
       aria-hidden
       className={cn("relative block overflow-hidden bg-black", className)}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/brand/mark-64.png"
         alt=""

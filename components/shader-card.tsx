@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "@tanstack/react-router"
 
 import { getItemKind, getPreview, type RegistryItem } from "@/lib/registry"
 import { Badge } from "@/components/ui/badge"
@@ -37,7 +37,8 @@ function ShaderCard({
         <div className="flex items-center justify-between gap-2">
           <Heading className="font-heading text-sm">
             <Link
-              href={`/shaders/${item.name}`}
+              to="/shaders/$name"
+              params={{ name: item.name }}
               className="outline-none after:absolute after:inset-0"
             >
               {item.title}

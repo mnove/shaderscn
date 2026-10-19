@@ -1,14 +1,13 @@
-// The image renderer only understands plain <img>, not next/image.
-/* eslint-disable @next/next/no-img-element */
 import { readFile } from "node:fs/promises"
 import path from "node:path"
-import { ImageResponse } from "next/og"
+import { Resvg } from "@resvg/resvg-js"
+import satori from "satori"
 
-// Shared renderer for the Open Graph images. Shaders are WebGL, which the
-// image renderer can't run, so the cards use the static capture of the mark.
+// Shared renderer for the Open Graph images, run at build time by
+// `scripts/og-images.tsx`. Shaders are WebGL, which the image renderer can't
+// run, so the cards use the static capture of the mark.
 
 export const ogSize = { width: 1200, height: 630 }
-export const ogContentType = "image/png"
 
 const fonts = Promise.all([
   readFile(path.join(process.cwd(), "assets/fonts/Merriweather-Regular.ttf")),
@@ -28,6 +27,7 @@ const MARK_POSITION = {
   right: 24,
 } as const
 
+/** Renders an Open Graph card to PNG. */
 export async function renderOgImage({
   eyebrow,
   title,
@@ -39,7 +39,7 @@ export async function renderOgImage({
 }) {
   const [[merriweather, inter], markSrc] = await Promise.all([fonts, mark])
 
-  return new ImageResponse(
+  const svg = await satori(
     <div
       style={{
         display: "flex",
@@ -47,6 +47,9 @@ export async function renderOgImage({
         justifyContent: "space-between",
         width: "100%",
         height: "100%",
+        // Satori sizes boxes content-box, which would push the padding off
+        // the card.
+        boxSizing: "border-box",
         padding: 72,
         backgroundColor: "#000000",
         color: "#fafafa",
@@ -68,8 +71,10 @@ export async function renderOgImage({
         </span>
       </div>
 
+      {/* Positioned so long titles paint over the mark, not under it. */}
       <div
         style={{
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           gap: 24,
@@ -121,4 +126,6 @@ export async function renderOgImage({
       ],
     }
   )
+
+  return new Resvg(svg).render().asPng()
 }

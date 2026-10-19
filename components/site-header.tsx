@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "@tanstack/react-router"
 
 import { getDocsGroups } from "@/lib/registry"
 import { GITHUB_URL } from "@/lib/site"
@@ -28,7 +28,7 @@ function SiteHeader({
         <SiteLogo />
         <nav className="flex items-center gap-1 text-xs">
           <Link
-            href="/"
+            to="/"
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
               "hidden sm:inline-flex"
@@ -37,7 +37,7 @@ function SiteHeader({
             Shaders
           </Link>
           <Link
-            href="/docs"
+            to="/docs"
             className={buttonVariants({ variant: "ghost", size: "sm" })}
           >
             Docs

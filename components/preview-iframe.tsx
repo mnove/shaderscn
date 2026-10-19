@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 
 const HEIGHT_MESSAGE = "shaderscn:preview-height"

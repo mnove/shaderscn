@@ -1,6 +1,7 @@
 dist/
 node_modules/
-.next/
+.tanstack/
+app/routeTree.gen.ts
 .turbo/
 coverage/
 pnpm-lock.yaml
