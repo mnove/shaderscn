@@ -14,4 +14,8 @@
     // instead of redirecting to a trailing-slash URL.
     "html_handling": "drop-trailing-slash",
   },
+  // Required by `wrangler preview`, which Workers Builds runs for
+  // non-production branches. Empty because there are no bindings or vars;
+  // assets and compatibility settings at the top level apply to Previews too.
+  "previews": {},
 }

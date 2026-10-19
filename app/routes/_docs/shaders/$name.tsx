@@ -160,9 +160,13 @@ function ShaderPage() {
           </TabsContent>
           <TabsContent value="manual" className="flex flex-col gap-4 pt-2">
             <Step n={1} title="Install the dependencies">
-              <CodeBlock code={`npm install ${item.dependencies.join(" ")}`} />
+              <CodeBlock
+                lang="shell"
+                code={`npm install ${item.dependencies.join(" ")}`}
+              />
               {item.registryDependencies && (
                 <CodeBlock
+                  lang="shell"
                   code={`npx shadcn@latest add ${item.registryDependencies.join(" ")}`}
                 />
               )}
