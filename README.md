@@ -35,9 +35,11 @@ pnpm install
 pnpm dev
 ```
 
-`dev` and `build` run `shadcn build` first, which turns `registry.json` into installable JSON in `public/r/`. That folder is generated and isn't committed.
+`dev` and `build` run `shadcn build` first, which turns `registry.json` into installable JSON in `public/r/`. `build` also renders the Open Graph images into `public/og/` (`pnpm og:build`), then prerenders every page to static HTML in `dist/client/`. Both folders are generated and aren't committed.
 
-Set `NEXT_PUBLIC_REGISTRY_URL` so the URL install commands on the site point at your deployment (it defaults to the `homepage` in `registry.json` in production and `http://localhost:3000` in development). The same URL is used for canonical links, the sitemap and `robots.txt`.
+The site is hosted on Cloudflare Workers as static assets only (see `wrangler.jsonc`). `pnpm preview:workers` serves the last build locally the way Cloudflare does, and `pnpm deploy` builds and deploys it.
+
+Set `VITE_REGISTRY_URL` so the URL install commands on the site point at your deployment (it defaults to the `homepage` in `registry.json` in production and `http://localhost:3000` in development). The same URL is used for canonical links, the sitemap and `robots.txt`.
 
 ## Adding a new shader
 

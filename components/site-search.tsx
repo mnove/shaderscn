@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
-import { usePathname, useRouter } from "next/navigation"
-import { useTheme } from "next-themes"
+import { useLocation, useNavigate } from "@tanstack/react-router"
+import { useTheme } from "@/components/theme-provider"
 import {
   ArrowUpRightIcon,
   CheckIcon,
@@ -62,8 +60,8 @@ function isTyping(target: EventTarget | null) {
 function SiteSearch({ groups }: { groups: DocsGroup[] }) {
   const [open, setOpen] = React.useState(false)
   const [copied, setCopied] = React.useState<string | null>(null)
-  const router = useRouter()
-  const pathname = usePathname()
+  const navigate = useNavigate()
+  const pathname = useLocation({ select: (location) => location.pathname })
   const isMac = useIsMac()
   const { resolvedTheme, setTheme } = useTheme()
   const current = groups
@@ -142,7 +140,7 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
               <CommandItem
                 value="Installation"
                 keywords={["docs", "setup", "registry", "shadcn"]}
-                onSelect={() => run(() => router.push("/docs"))}
+                onSelect={() => run(() => navigate({ to: "/docs" }))}
               >
                 <TerminalIcon />
                 Installation
@@ -150,7 +148,7 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
               <CommandItem
                 value="Browse all shaders"
                 keywords={["gallery", "collection", "home"]}
-                onSelect={() => run(() => router.push("/"))}
+                onSelect={() => run(() => navigate({ to: "/" }))}
               >
                 <LayoutGridIcon />
                 Browse all shaders
@@ -166,7 +164,12 @@ function SiteSearch({ groups }: { groups: DocsGroup[] }) {
                       value={item.title}
                       keywords={[item.name, item.description, group.label]}
                       onSelect={() =>
-                        run(() => router.push(`/shaders/${item.name}`))
+                        run(() =>
+                          navigate({
+                            to: "/shaders/$name",
+                            params: { name: item.name },
+                          })
+                        )
                       }
                     >
                       <Icon />

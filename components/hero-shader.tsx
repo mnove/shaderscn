@@ -1,8 +1,6 @@
-"use client"
-
 import * as React from "react"
 import { Heatmap } from "@paper-design/shaders-react"
-import { useTheme } from "next-themes"
+import { useTheme } from "@/components/theme-provider"
 
 import { cn } from "@/lib/utils"
 import { MARK_FRAME, MARK_SHADER } from "@/components/site-mark"

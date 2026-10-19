@@ -1,8 +1,7 @@
-import type { Metadata } from "next"
-import Link from "next/link"
+import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowUpRightIcon } from "lucide-react"
 
-import { baseOpenGraph } from "@/lib/metadata"
+import { ogImagePath, pageHead } from "@/lib/metadata"
 import {
   installCommand,
   PAPER_SHADERS_URL,
@@ -17,16 +16,21 @@ const title = "Get started"
 const description =
   "Add shaderscn sections and components to your project with the shadcn CLI, or copy the source directly."
 
-export const metadata: Metadata = {
-  title,
-  description,
-  alternates: { canonical: "/docs" },
-  openGraph: { ...baseOpenGraph, title, description, url: "/docs" },
-}
+export const Route = createFileRoute("/_docs/docs")({
+  head: () =>
+    pageHead({
+      title,
+      description,
+      path: "/docs",
+      image: ogImagePath("docs"),
+      imageAlt: "Get started with shaderscn",
+    }),
+  component: DocsPage,
+})
 
 const EXAMPLE = "god-rays-hero"
 
-export default function DocsPage() {
+function DocsPage() {
   return (
     <div className="mx-auto w-full max-w-4xl px-4 pb-14 sm:px-6 md:px-10">
       <section className="flex flex-col gap-4 border-b py-12 sm:py-16">
@@ -104,7 +108,7 @@ export default function DocsPage() {
           dependencies to install and the complete source to paste.
         </Text>
         <div className="flex flex-wrap gap-2">
-          <Link href="/" className={buttonVariants()}>
+          <Link to="/" className={buttonVariants()}>
             Browse shaders
           </Link>
           <a

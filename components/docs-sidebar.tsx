@@ -1,7 +1,4 @@
-"use client"
-
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { Link, useLocation } from "@tanstack/react-router"
 import {
   ComponentIcon,
   LayersIcon,
@@ -35,11 +32,9 @@ function DocsSidebar({
   groups,
   ...props
 }: { groups: DocsGroup[] } & React.ComponentProps<typeof Sidebar>) {
-  const pathname = usePathname()
+  const pathname = useLocation({ select: (location) => location.pathname })
   const { setOpenMobile } = useSidebar()
-  const link = (href: string) => (
-    <Link href={href} onClick={() => setOpenMobile(false)} />
-  )
+  const close = () => setOpenMobile(false)
 
   return (
     <Sidebar {...props}>
@@ -51,7 +46,7 @@ function DocsSidebar({
               <SidebarMenuItem>
                 <SidebarMenuButton
                   isActive={pathname === "/docs"}
-                  render={link("/docs")}
+                  render={<Link to="/docs" onClick={close} />}
                 >
                   <TerminalIcon />
                   <span>Installation</span>
@@ -71,13 +66,18 @@ function DocsSidebar({
               <SidebarGroupContent>
                 <SidebarMenu>
                   {group.items.map((item) => {
-                    const href = `/shaders/${item.name}`
                     return (
                       <SidebarMenuItem key={item.name}>
                         <SidebarMenuButton
                           size="sm"
-                          isActive={pathname === href}
-                          render={link(href)}
+                          isActive={pathname === `/shaders/${item.name}`}
+                          render={
+                            <Link
+                              to="/shaders/$name"
+                              params={{ name: item.name }}
+                              onClick={close}
+                            />
+                          }
                         >
                           <span>{item.title}</span>
                         </SidebarMenuButton>

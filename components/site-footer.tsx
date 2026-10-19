@@ -1,15 +1,15 @@
-import Link from "next/link"
+import { Link } from "@tanstack/react-router"
 
 import { GITHUB_URL, PAPER_SHADERS_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { SiteLogo } from "@/components/site-logo"
 
 const LINKS = [
-  { label: "Shaders", href: "/" },
-  { label: "Docs", href: "/docs" },
-  { label: "GitHub", href: GITHUB_URL, external: true },
-  { label: "Paper Shaders", href: PAPER_SHADERS_URL, external: true },
-]
+  { label: "Shaders", to: "/" },
+  { label: "Docs", to: "/docs" },
+  { label: "GitHub", href: GITHUB_URL },
+  { label: "Paper Shaders", href: PAPER_SHADERS_URL },
+] as const
 
 function SiteFooter({
   fullWidth = false,
@@ -45,7 +45,7 @@ function SiteFooter({
           className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground"
         >
           {LINKS.map((link) =>
-            link.external ? (
+            "href" in link ? (
               <a
                 key={link.label}
                 href={link.href}
@@ -58,7 +58,7 @@ function SiteFooter({
             ) : (
               <Link
                 key={link.label}
-                href={link.href}
+                to={link.to}
                 className="hover:text-foreground"
               >
                 {link.label}

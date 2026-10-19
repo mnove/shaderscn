@@ -1,6 +1,3 @@
-import { promises as fs } from "node:fs"
-import path from "node:path"
-
 import registry from "@/registry.json"
 import { previews } from "@/registry/previews"
 
@@ -39,20 +36,17 @@ export function getDocsGroups() {
 
 export type DocsGroup = ReturnType<typeof getDocsGroups>[number]
 
+// Each file is its own lazy chunk, so a page only loads the source it shows.
+const sources = import.meta.glob<string>("/registry/shaders/**/*.{ts,tsx}", {
+  query: "?raw",
+  import: "default",
+})
+
 export async function getItemSource(item: RegistryItem) {
   return Promise.all(
     item.files.map(async (file) => ({
-      name: path.basename(file.path),
-      // Scope the read to the registry folder so the build doesn't trace the
-      // whole project into the server output.
-      content: await fs.readFile(
-        path.join(
-          process.cwd(),
-          "registry",
-          path.relative("registry", file.path)
-        ),
-        "utf8"
-      ),
+      name: file.path.split("/").pop() ?? file.path,
+      content: await sources[`/${file.path}`](),
     }))
   )
 }

@@ -1,0 +1,9 @@
+# Cloudflare static asset headers, copied into dist/client by the build.
+
+# Build output is content-hashed, so it can be cached forever.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 404.html is also reachable at /404, which shouldn't be indexed.
+/404
+  X-Robots-Tag: noindex

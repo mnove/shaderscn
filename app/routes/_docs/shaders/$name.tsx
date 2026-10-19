@@ -1,6 +1,4 @@
-import type { Metadata } from "next"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import { Link, createFileRoute, notFound } from "@tanstack/react-router"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 
 import {
@@ -9,9 +7,8 @@ import {
   getItemSource,
   getPreview,
   getRegistryItem,
-  getRegistryItems,
 } from "@/lib/registry"
-import { baseOpenGraph, websiteId } from "@/lib/metadata"
+import { absoluteUrl, ogImagePath, pageHead, websiteId } from "@/lib/metadata"
 import { installCommand as getInstallCommand, REGISTRY_URL } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -23,42 +20,31 @@ import { CommandSnippet } from "@/components/command-snippet"
 import { JsonLd } from "@/components/json-ld"
 import { PreviewIframe } from "@/components/preview-iframe"
 
-export const dynamicParams = false
+export const Route = createFileRoute("/_docs/shaders/$name")({
+  loader: async ({ params }) => {
+    const item = getRegistryItem(params.name)
+    if (!item) throw notFound()
+    return { item, files: await getItemSource(item) }
+  },
+  head: ({ loaderData }) => {
+    if (!loaderData) return {}
 
-export function generateStaticParams() {
-  return getRegistryItems().map((item) => ({ name: item.name }))
-}
+    const { item } = loaderData
+    const kind = getItemKind(item)
+    return pageHead({
+      title: `${item.title} — Shader ${kind} for shadcn/ui`,
+      description: `${item.description} A copy-paste React ${kind.toLowerCase()} for shadcn/ui, built on Paper Shaders.`,
+      path: `/shaders/${item.name}`,
+      image: ogImagePath(`shaders/${item.name}`),
+      imageAlt: "A shaderscn shader component for shadcn/ui",
+    })
+  },
+  component: ShaderPage,
+})
 
-export async function generateMetadata({
-  params,
-}: PageProps<"/shaders/[name]">): Promise<Metadata> {
-  const { name } = await params
-  const item = getRegistryItem(name)
-
-  if (!item) return {}
-
-  const kind = getItemKind(item)
-  const title = `${item.title} — Shader ${kind} for shadcn/ui`
-  const description = `${item.description} A copy-paste React ${kind.toLowerCase()} for shadcn/ui, built on Paper Shaders.`
-  const url = `/shaders/${item.name}`
-
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: { ...baseOpenGraph, title, description, url },
-  }
-}
-
-export default async function ShaderPage({
-  params,
-}: PageProps<"/shaders/[name]">) {
-  const { name } = await params
-  const item = getRegistryItem(name)
-  if (!item) notFound()
-
+function ShaderPage() {
+  const { item, files } = Route.useLoaderData()
   const preview = getPreview(item.name)
-  const files = await getItemSource(item)
   const installCommand = getInstallCommand(item.name)
   const url = `${REGISTRY_URL}/shaders/${item.name}`
 
@@ -80,7 +66,7 @@ export default async function ShaderPage({
               name: item.title,
               description: item.description,
               url,
-              image: `${url}/opengraph-image`,
+              image: absoluteUrl(ogImagePath(`shaders/${item.name}`)),
               programmingLanguage: "TypeScript",
               runtimePlatform: "React",
               softwareRequirements: item.dependencies,
@@ -95,7 +81,7 @@ export default async function ShaderPage({
                   "@type": "ListItem",
                   position: 1,
                   name: "Shaders",
-                  item: REGISTRY_URL,
+                  item: absoluteUrl("/"),
                 },
                 {
                   "@type": "ListItem",
@@ -110,7 +96,7 @@ export default async function ShaderPage({
       />
       <div className="flex flex-col gap-4">
         <Link
-          href="/"
+          to="/"
           className="flex w-fit items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"
         >
           <ArrowLeftIcon className="size-3.5" />
@@ -174,13 +160,9 @@ export default async function ShaderPage({
           </TabsContent>
           <TabsContent value="manual" className="flex flex-col gap-4 pt-2">
             <Step n={1} title="Install the dependencies">
-              <CodeBlock
-                lang="bash"
-                code={`npm install ${item.dependencies.join(" ")}`}
-              />
+              <CodeBlock code={`npm install ${item.dependencies.join(" ")}`} />
               {item.registryDependencies && (
                 <CodeBlock
-                  lang="bash"
                   code={`npx shadcn@latest add ${item.registryDependencies.join(" ")}`}
                 />
               )}
@@ -210,7 +192,8 @@ export default async function ShaderPage({
       >
         {previous ? (
           <Link
-            href={`/shaders/${previous.name}`}
+            to="/shaders/$name"
+            params={{ name: previous.name }}
             className={buttonVariants({ variant: "ghost" })}
           >
             <ArrowLeftIcon /> {previous.title}
@@ -220,7 +203,8 @@ export default async function ShaderPage({
         )}
         {next && (
           <Link
-            href={`/shaders/${next.name}`}
+            to="/shaders/$name"
+            params={{ name: next.name }}
             className={buttonVariants({ variant: "ghost" })}
           >
             {next.title} <ArrowRightIcon />

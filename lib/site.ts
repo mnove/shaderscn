@@ -3,10 +3,8 @@ import registry from "@/registry.json"
 // Where the registry is served from. Also the site's canonical origin, used
 // for metadata, the sitemap and robots.
 export const REGISTRY_URL = (
-  process.env.NEXT_PUBLIC_REGISTRY_URL ??
-  (process.env.NODE_ENV === "production"
-    ? registry.homepage
-    : "http://localhost:3000")
+  import.meta.env.VITE_REGISTRY_URL ??
+  (import.meta.env.PROD ? registry.homepage : "http://localhost:3000")
 ).replace(/\/$/, "")
 
 /** The shadcn registry namespace users install from, e.g. `@shaderscn/god-rays-hero`. */

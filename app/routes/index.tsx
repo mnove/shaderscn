@@ -1,10 +1,15 @@
-import type { Metadata } from "next"
-import Link from "next/link"
+import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowDownIcon, InfoIcon, StarIcon } from "lucide-react"
 
-import { baseOpenGraph, siteDescription, websiteId } from "@/lib/metadata"
+import {
+  absoluteUrl,
+  ogImagePath,
+  pageHead,
+  siteDescription,
+  websiteId,
+} from "@/lib/metadata"
 import { getItemKind, getRegistryItems } from "@/lib/registry"
-import { GITHUB_URL, installCommand, REGISTRY_URL } from "@/lib/site"
+import { GITHUB_URL, installCommand } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { CommandSnippet } from "@/components/command-snippet"
@@ -14,12 +19,17 @@ import { ShaderCard } from "@/components/shader-card"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 
-// Set here rather than in the layout, which would hand every page the
-// homepage's canonical URL.
-export const metadata: Metadata = {
-  alternates: { canonical: "/" },
-  openGraph: { ...baseOpenGraph, url: "/" },
-}
+export const Route = createFileRoute("/")({
+  // Set here rather than in the root, which would hand every page the
+  // homepage's canonical URL.
+  head: () =>
+    pageHead({
+      path: "/",
+      image: ogImagePath("home"),
+      imageAlt: "shaderscn: shader components you can copy and paste",
+    }),
+  component: Page,
+})
 
 const GROUPS = [
   {
@@ -38,7 +48,7 @@ const GROUPS = [
   },
 ] as const
 
-export default function Page() {
+function Page() {
   const items = getRegistryItems()
 
   return (
@@ -49,7 +59,7 @@ export default function Page() {
           "@type": "WebSite",
           "@id": websiteId,
           name: "shaderscn",
-          url: REGISTRY_URL,
+          url: absoluteUrl("/"),
           description: siteDescription,
         }}
       />
@@ -101,7 +111,7 @@ export default function Page() {
               className="mt-2 w-full max-w-xl"
             >
               <Link
-                href="/docs"
+                to="/docs"
                 aria-label="Setup guide"
                 title="Works in any shadcn project. See the setup guide."
                 className={buttonVariants({

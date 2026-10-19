@@ -1,9 +1,5 @@
-<!-- BEGIN:nextjs-agent-rules -->
+# TanStack Start
 
-# This is NOT the Next.js you know
+This site is a TanStack Start app, prerendered to static HTML at build time. TanStack ships agent docs with the package: read the relevant `SKILL.md` under `node_modules/@tanstack/react-start/skills/` (and `node_modules/@tanstack/start-client-core/skills/` for server routes, server functions and the execution model) before changing routing, loaders or the build.
 
-This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
-
-This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
-
-<!-- END:nextjs-agent-rules -->
+Every page must stay prerenderable: no request-time server code. New dynamic routes need their paths listed in `pages` in `vite.config.ts`.

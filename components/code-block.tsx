@@ -1,25 +1,15 @@
-import { codeToHtml } from "shiki"
-
 import { cn } from "@/lib/utils"
 import { CopyButton } from "@/components/copy-button"
 
-async function CodeBlock({
+function CodeBlock({
   code,
-  lang = "tsx",
   title,
   className,
 }: {
   code: string
-  lang?: string
   title?: string
   className?: string
 }) {
-  const html = await codeToHtml(code, {
-    lang,
-    themes: { light: "github-light", dark: "github-dark" },
-    defaultColor: false,
-  })
-
   return (
     <div className={cn("relative overflow-hidden border bg-card", className)}>
       {title ? (
@@ -32,10 +22,9 @@ async function CodeBlock({
       ) : (
         <CopyButton value={code} className="absolute top-1.5 right-1.5 z-10" />
       )}
-      <div
-        className="code-block max-h-[600px] overflow-auto text-[13px] leading-relaxed [&_pre]:min-w-max [&_pre]:p-4 [&_pre]:pr-12"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
+      <pre className="max-h-[600px] overflow-auto p-4 pr-12 font-mono text-[13px] leading-relaxed">
+        <code>{code}</code>
+      </pre>
     </div>
   )
 }
