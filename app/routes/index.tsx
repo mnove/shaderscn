@@ -2,13 +2,14 @@ import { Link, createFileRoute } from "@tanstack/react-router"
 import { ArrowDownIcon, InfoIcon, StarIcon } from "lucide-react"
 
 import {
+  absoluteUrl,
   ogImagePath,
   pageHead,
   siteDescription,
   websiteId,
 } from "@/lib/metadata"
 import { getItemKind, getRegistryItems } from "@/lib/registry"
-import { GITHUB_URL, installCommand, REGISTRY_URL } from "@/lib/site"
+import { GITHUB_URL, installCommand } from "@/lib/site"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { CommandSnippet } from "@/components/command-snippet"
@@ -58,7 +59,7 @@ function Page() {
           "@type": "WebSite",
           "@id": websiteId,
           name: "shaderscn",
-          url: REGISTRY_URL,
+          url: absoluteUrl("/"),
           description: siteDescription,
         }}
       />

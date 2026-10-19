@@ -81,7 +81,7 @@ function ShaderPage() {
                   "@type": "ListItem",
                   position: 1,
                   name: "Shaders",
-                  item: REGISTRY_URL,
+                  item: absoluteUrl("/"),
                 },
                 {
                   "@type": "ListItem",

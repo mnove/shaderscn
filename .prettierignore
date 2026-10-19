@@ -1,6 +1,7 @@
 dist/
 node_modules/
 .tanstack/
+.wrangler/
 app/routeTree.gen.ts
 .turbo/
 coverage/

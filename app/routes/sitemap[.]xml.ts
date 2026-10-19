@@ -5,7 +5,8 @@ import { REGISTRY_URL } from "@/lib/site"
 
 // Reads registry.json directly: lib/registry pulls in every shader component.
 const urls = [
-  { url: REGISTRY_URL, priority: 1 },
+  // With the trailing slash, to match the homepage's canonical URL.
+  { url: `${REGISTRY_URL}/`, priority: 1 },
   { url: `${REGISTRY_URL}/docs`, priority: 0.9 },
   ...registry.items.map((item) => ({
     url: `${REGISTRY_URL}/shaders/${item.name}`,

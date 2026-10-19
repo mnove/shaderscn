@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shaderscn",
+  "compatibility_date": "2026-10-19",
+  // Assets-only: no "main", so no Worker script runs. Every page is
+  // prerendered to HTML by `pnpm build`.
+  "assets": {
+    "directory": "./dist/client/",
+    // Unknown URLs get the prerendered 404.html with a 404 status. The site
+    // isn't a SPA, so they shouldn't fall back to index.html.
+    "not_found_handling": "404-page",
+    // Pages are written as /shaders/<name>/index.html. Serve them at
+    // /shaders/<name> directly, matching the canonical URLs and sitemap,
+    // instead of redirecting to a trailing-slash URL.
+    "html_handling": "drop-trailing-slash",
+  },
+}

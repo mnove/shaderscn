@@ -7,6 +7,9 @@
     "dev": "shadcn build && vite dev",
     "build": "shadcn build && pnpm og:build && vite build",
     "preview": "vite preview",
+    "preview:workers": "wrangler dev",
+    "deploy": "pnpm build && wrangler deploy",
+    "deploy:dry": "pnpm build && wrangler deploy --dry-run",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{ts,tsx}\"",
     "typecheck": "tsc --noEmit",
@@ -47,6 +50,7 @@
     "tsx": "^4.23.15",
     "typescript": "^5",
     "typescript-eslint": "^8.71.2",
-    "vite": "^8.3.4"
+    "vite": "^8.3.4",
+    "wrangler": "^4.151.1"
   }
 }
