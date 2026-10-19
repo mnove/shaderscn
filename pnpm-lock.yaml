@@ -50,6 +50,9 @@ importers:
       shadcn:
         specifier: ^4.21.1
         version: 4.21.1(typescript@5.9.3)
+      sugar-high:
+        specifier: ^2.6.1
+        version: 2.6.1
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
@@ -3139,6 +3142,9 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  sugar-high@2.6.1:
+    resolution: {integrity: sha512-LQrLBFWE/2Ge8dRtZR80lndFq3RDFCY3/M0sbPK28oM4c17TfpOaNTKzD/rzVGSvNC/bX+dbgH735Z5G9ZDtdw==}
 
   supports-color@10.2.2:
     resolution: {integrity: sha512-SS+jx45GF1QjgEXQx4NJZV9ImqmO2NPz5FNsIHrsDjh2YsHnawpan7SNQ1o8NuhrbHZy9AZhIoCUiCeaW/C80g==}
@@ -6329,6 +6335,8 @@ snapshots:
   strip-final-newline@4.0.0: {}
 
   strip-json-comments@3.1.1: {}
+
+  sugar-high@2.6.1: {}
 
   supports-color@10.2.2: {}
 

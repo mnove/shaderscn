@@ -40,6 +40,16 @@
     --sidebar-accent-foreground: oklch(0.205 0 0);
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
+    /* Code highlighting (sugar-high), see components/code-block.tsx */
+    --sh-identifier: var(--foreground);
+    --sh-jsxliterals: var(--foreground);
+    --sh-sign: var(--muted-foreground);
+    --sh-comment: var(--muted-foreground);
+    --sh-keyword: oklch(0.508 0.118 165.612);
+    --sh-string: oklch(0.555 0.146 49);
+    --sh-class: oklch(0.488 0.17 262);
+    --sh-entity: oklch(0.488 0.17 262);
+    --sh-property: oklch(0.496 0.17 303);
 }
 
 .dark {
@@ -74,6 +84,15 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+    --sh-identifier: var(--foreground);
+    --sh-jsxliterals: var(--foreground);
+    --sh-sign: var(--muted-foreground);
+    --sh-comment: var(--muted-foreground);
+    --sh-keyword: oklch(0.765 0.15 163);
+    --sh-string: oklch(0.8 0.12 65);
+    --sh-class: oklch(0.78 0.11 255);
+    --sh-entity: oklch(0.78 0.11 255);
+    --sh-property: oklch(0.78 0.12 305);
 }
 
 @theme inline {
